@@ -1,0 +1,11 @@
+div
+  p
+    | Signed in as @
+    =cookies.signed[:username]
+    | .
+
+  #messages
+  br
+  br
+
+  = text_field_tag :body, '', id: 'chat-speak'
