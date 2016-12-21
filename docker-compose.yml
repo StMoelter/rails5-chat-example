@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  rails5-chat:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+    networks:
+      - rails5_chat_dev
+
+  redis:
+    image: redis:alpine
+    networks:
+      - rails5_chat_dev
+
+networks:
+  rails5_chat_dev:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.10.43.0/24
+        gateway: 10.10.43.1
