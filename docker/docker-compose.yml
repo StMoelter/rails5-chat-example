@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  rails5-chat:
+    image: stmoelter/rails5-chat-example:blog-1.2
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+    networks:
+      - rails5_chat_dev_1_2
+
+  redis:
+    image: redis:alpine
+    networks:
+      - rails5_chat_dev_1_2
+
+networks:
+  rails5_chat_dev_1_2:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.10.44.0/24
+        gateway: 10.10.44.1
